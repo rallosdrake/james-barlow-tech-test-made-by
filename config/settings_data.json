@@ -3,24 +3,24 @@
     "color_schemes": {
       "primary": {
         "settings": {
-          "background": "",
-          "contrast": "",
-          "text": "",
-          "links": "",
-          "icons": "",
-          "border": "",
-          "primary_button_background": "",
-          "primary_button_border": "",
-          "primary_button_text": "",
-          "primary_button_background_hover": "",
-          "primary_button_border_hover": "",
-          "primary_button_text_hover": "",
-          "secondary_button_background": "",
-          "secondary_button_border": "",
-          "secondary_button_text": "",
-          "secondary_button_background_hover": "",
-          "secondary_button_border_hover": "",
-          "secondary_button_text_hover": ""
+          "background": "#FFFFFF",
+          "contrast": "#0F172A",
+          "text": "#111827",
+          "links": "#1D4ED8",
+          "icons": "#374151",
+          "border": "#E5E7EB",
+          "primary_button_background": "#111827",
+          "primary_button_border": "#111827",
+          "primary_button_text": "#FFFFFF",
+          "primary_button_background_hover": "#0F172A",
+          "primary_button_border_hover": "#0F172A",
+          "primary_button_text_hover": "#FFFFFF",
+          "secondary_button_background": "#FFFFFF",
+          "secondary_button_border": "#111827",
+          "secondary_button_text": "#111827",
+          "secondary_button_background_hover": "#F3F4F6",
+          "secondary_button_border_hover": "#111827",
+          "secondary_button_text_hover": "#111827"
         }
       }
     }

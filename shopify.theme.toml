@@ -1,0 +1,5 @@
+[environments.development]
+store = "jamesbarlow-202509"
+theme-editor-sync = true
+nodelete = true
+error-overlay = "silent"
