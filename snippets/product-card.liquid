@@ -1,3 +1,86 @@
-{% if product %}
-  <div> This is title {{ product.title }} </div>
-{% endif %}
+{%- comment -%}
+Props:
+  - product: Product object (required)
+  - show_badge: Boolean (default true)
+  - show_sizes: Boolean (default true)
+  - show_colours_hint: Boolean (default true)
+{%- endcomment -%}
+
+{%- liquid
+    assign show_badge        = show_badge        | default: true
+    assign show_sizes        = show_sizes        | default: true
+    assign show_colours_hint = show_colours_hint | default: true
+  
+    assign first_image = product.featured_image | default: product.images.first
+    assign badge_text  = product.metafields.custom.badge.value
+  -%}
+  
+  <article class="">
+    <a href="{{ product.url }}" class="block">
+      {%- if first_image -%}
+        <div class="aspect-[3/4] bg-neutral-100 overflow-hidden">
+          <img
+            src="{{ first_image | image_url: width: 900 }}"
+            alt="{{ first_image.alt | escape }}"
+            loading="lazy"
+            class="w-full h-full object-cover transition-transform duration-300 supports-hover:group-hover:scale-[1.02]"
+          >
+        </div>
+      {%- endif -%}
+    </a>
+    {%- comment %} Hover reveal layer {%- endcomment -%}
+    <div class="pointer-events-none absolute inset-x-0 bottom-0 p-4 opacity-0 transition-opacity duration-200 supports-hover:group-hover:opacity-100">
+      <div class="rounded-2xl bg-white/90 backdrop-blur-md p-3 shadow-lg">
+        {%- if show_sizes and product.has_only_default_variant == false -%}
+          {%- liquid
+            # try to find 'Size' option, else use first option
+            assign size_index = -1
+            for opt in product.options_with_values
+              if opt.name == 'Size'
+                assign size_index = forloop.index0
+              endif
+            endfor
+            if size_index == -1
+              assign size_index = 0
+            endif
+          -%}
+          <ul class="flex flex-wrap gap-3 text-sm">
+            {%- for v in product.variants -%}
+              {%- assign size_label = v.options[size_index] -%}
+              <li class="px-2 py-1 rounded-full border border-neutral-300 bg-white/70">
+                {{ size_label }}
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+        
+      </div>
+    </div>
+  
+    {%- comment %} Static info {%- endcomment -%}
+    <div class="mt-3 ml-4">
+    <div class="flex flex-row items-baseline justify-between">
+      <h3 class="text-base">{{ product.title }}</h3>
+      {%- if show_colours_text -%}
+        <p class="mt-2 text-sm mr-6 text-neutral-600">+ 6 Colours</p>
+      {%- endif -%}
+    </div>
+      <p class="mt-1 text-sm text-neutral-700">
+        {{  product.price | money_without_trailing_zeros }}
+      </p>
+    </div>
+  
+    {%- if show_badge and badge_text != blank -%}
+      <span class="absolute left-3 top-3 rounded-md bg-emerald-700 text-white text-xs px-2 py-1">
+        {{ badge_text }}
+      </span>
+    {%- endif -%}
+  
+    {%- comment %} Wishlist icon placeholder {%- endcomment -%}
+    {% comment %} <button type="button"
+            class="supports-hover:opacity-0 supports-hover:group-hover:opacity-100 transition-opacity absolute right-3 top-3 p-2 rounded-full bg-white/90 shadow"
+            aria-label="Add to wishlist">
+      {% render 'icon-heart' %}
+    </button> {% endcomment %}
+  </article>
+  
