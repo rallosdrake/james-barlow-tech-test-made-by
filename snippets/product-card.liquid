@@ -19,14 +19,15 @@ Props passed into this component:
   <a href="{{ product.url }}" class="block group">
     {% if first_image %}
       <div class="relative aspect-[3/4] overflow-hidden">
-        <img
-          src="{{ first_image | image_url: width: 900 }}"
-          alt="{{ first_image.alt | escape }}"
-          loading="lazy"
+        {% render 'image' 
+          image: first_image,
           class="w-full h-full object-cover transition-transform duration-300
-                 supports-hover:group-hover:scale-[1.02]"
-        >
-
+          supports-hover:group-hover:scale-[1.02]",
+          factor: 0.5,
+          mobile_factor: 1,
+          loading: 'eager',
+          alt: product.title
+        %}
         {%- if show_badge and badge_text != blank -%}
           <span
             class="absolute left-2 top-2 px-2 py-1 text-xs
@@ -94,31 +95,3 @@ Props passed into this component:
   </div>
 </article>
 
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const touchOnly = window.matchMedia('(hover: none)');
-    if (!touchOnly.matches) return;
-    const cards = document.querySelectorAll('.product-card');
-    function deactivateAll(except) {
-      cards.forEach(c => { if (c !== except) c.classList.remove('is-active'); });
-    }
-  
-    cards.forEach(card => {
-      const link = card.querySelector('a');
-      link.addEventListener('click', (e) => {
-        if (!card.classList.contains('is-active')) {
-          e.preventDefault(); 
-          deactivateAll(card);
-          card.classList.add('is-active');
-        }
-      });
-  
-      document.addEventListener('click', (evt) => {
-        if (!card.contains(evt.target)) card.classList.remove('is-active');
-      });
-  
-      card.querySelectorAll('.variant-item, button, [data-prevent-nav]')
-        .forEach(el => el.addEventListener('click', ev => ev.stopPropagation()));
-    });
-  });
-</script>
