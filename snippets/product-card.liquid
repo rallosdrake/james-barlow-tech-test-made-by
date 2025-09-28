@@ -53,27 +53,23 @@ Props passed into this component:
                 assign size_index = 0
               endif
             -%}
-            <div
-              class="absolute inset-x-0 bottom-0 p-3
-                     opacity-0 group-hover:opacity-100 transition-opacity duration-200
-                     pointer-events-none"
-            >
+            <div class="absolute inset-x-0 bottom-0 p-3
+              opacity-0 group-hover:opacity-100 transition-opacity duration-200
+              pointer-events-none">
               <div class="bg-white/90 backdrop-blur-md p-2 shadow-md">
-                <ul class="flex flex-wrap gap-2 text-xs justify-center text-pale-grey">
-                    {%- for variant in product.variants -%}
-                      {%- assign variant_label = variant.options[size_index] -%}
-                      {%- assign variant_qty = variant.available -%}
-                      {%-  if variant_qty -%}
-                      <li class="px-2 py-1 flex justify-center items-center">
-                        {{ variant_label }}
-                      </li>
-                    {%- else -%} 
-                        <li class="px-2 py-1 flex justify-center items-center text-pale-grey opacity-50" disabled>
-                            {{ variant_label }}
-                        </li>
-                        {%- endif -%}
-                    {%- endfor -%}
-                  </ul>
+                <ul class="flex flex-wrap gap-2 text-xs justify-center text-pale-grey" id="variant-list">
+                  {%- for variant in product.variants -%}
+                    {%- assign variant_label = variant.options[size_index] -%}
+                    {%- assign variant_qty = variant.available -%}
+                    <li
+                      class="px-2 py-1 flex justify-center items-center cursor-pointer variant-item
+                              {% unless variant_qty %}text-pale-grey opacity-50 pointer-events-none{% endunless %}"
+                      data-variant-id="{{ variant.id }}"
+                    >
+                      {{ variant_label }}
+                    </li>
+                  {%- endfor -%}
+                </ul>
               </div>
             </div>
           {% endif %}
@@ -85,7 +81,7 @@ Props passed into this component:
       <div class="flex flex-row items-baseline justify-between">
         <h3 class="text-base">{{ product.title }}</h3>
         {% if show_colours_hint %}
-          <p class="mt-2 text-sm mr-6 text-[--color-pale-grey]">+ 6 Colours</p>
+          <p class="mt-2 text-sm mr-6 text-[--color-pale-grey] opacity-50">+ 6 Colours</p>
         {% endif %}
       </div>
       {%- for variant in product.variants limit:1 -%}
