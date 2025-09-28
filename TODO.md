@@ -37,7 +37,7 @@
   - Show wishlist icon. X
   - Show “+6 colors”. X
   - Show size selector (variant list). X
-- Style wishlist icon and badge
+- Style wishlist icon and badge 
 
 ---
 
