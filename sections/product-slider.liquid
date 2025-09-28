@@ -21,8 +21,8 @@
     </div>
   
     {% if products == blank %}
-      <div class="mx-auto px-4 py-12 text-center text-neutral-600">
-        {{ 'sections.product_slider.empty' | t | default: 'No products selected.' }}
+      <div class="mx-auto px-4 py-12 text-center">
+        {{ 'product_slider.empty' | t | default: 'No products selected.' }}
       </div>
     {% else %}
         <div>
@@ -60,7 +60,7 @@
           </div>
   
       <!-- Mobile sticky Title + CTA -->
-      {% comment %} <div class="tablet:hidden fixed inset-x-0 bottom-0 z-20">
+       {% comment %} <div class="tablet:hidden fixed inset-x-0 bottom-0 z-20">
         <div class="mx-4 mb-4 rounded-2xl bg-white/90 backdrop-blur-md shadow-lg">
           <div class="flex items-center justify-between gap-3 px-4 py-3">
             <h2 class="text-base font-medium truncate">{{ section.settings.heading }}</h2>
