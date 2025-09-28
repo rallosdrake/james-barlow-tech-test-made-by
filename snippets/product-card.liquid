@@ -18,7 +18,7 @@ Props passed into this component:
   <article class="pb-20">
     <a href="{{ product.url }}" class="block group">
       {% if first_image %}
-        <div class="relative aspect-[3/4] overflow-hidden bg-neutral-100 group">
+        <div class="relative aspect-[3/4] overflow-hidden group">
           <img
             src="{{ first_image | image_url: width: 900 }}"
             alt="{{ first_image.alt | escape }}"
@@ -27,17 +27,16 @@ Props passed into this component:
           >
   
           {%- if show_badge and badge_text != blank -%}
-            <span class="absolute left-2 top-2 rounded-md bg-emerald-700 text-white text-xs px-2 py-1
+            <span class="absolute left-2 top-2 bg-[rgb(var(--color-highlight))] text-[rgb(var(--color-white))] text-xs px-2 py-1
                           opacity-0 group-hover:opacity-100 transition-opacity duration-200">
               {{ badge_text }}
             </span>
           {%- endif -%}
   
           <button type="button"
-            class="absolute right-2 top-2 p-2 rounded-full bg-white/90 shadow
-                   opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+            class="absolute right-2 top-2 p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
             aria-label="Add to wishlist">
-            Icon
+            {%- render 'svg', svg: 'wishlist', class: 'w-6 h-6 text-gray-500' -%}
           </button>
   
           {%- comment -%} Sizes overlay: bottom of image, show on hover {%- endcomment -%}
@@ -57,14 +56,14 @@ Props passed into this component:
               opacity-0 group-hover:opacity-100 transition-opacity duration-200
               ">
               <div class="bg-white/90 backdrop-blur-md p-2 shadow-md">
-                <ul class="flex flex-wrap gap-2 text-xs justify-center text-pale-grey">
+                <ul class="flex flex-wrap gap-2 text-xs justify-center text-[rgb(var(--color-black))]">
                   {%- for variant in product.variants -%}
                     {%- assign variant_label = variant.options[size_index] -%}
                     {%- assign variant_qty = variant.available -%}
                     <li
                       class="px-2 py-1 flex justify-center items-center cursor-pointer variant-item
                              hover:underline
-                             {% unless variant_qty %}text-pale-grey opacity-50 pointer-events-none{% endunless %}"
+                             {% unless variant_qty %}text-[rgb(var(--color-pale-grey))] pointer-events-none{% endunless %}"
                       data-variant-id="{{ variant.id }}"
                     >
                       {{ variant_label }}
@@ -82,13 +81,13 @@ Props passed into this component:
       <div class="flex flex-row items-baseline justify-between">
         <h3 class="text-base">{{ product.title }}</h3>
         {% if show_colours_hint %}
-          <p class="mt-2 text-sm mr-6 text-[--color-pale-grey] opacity-50">+ 6 Colours</p>
+          <p class="mt-2 text-sm mr-6 text-[rgb(var(--color-pale-grey))]">+ 6 Colours</p>
         {% endif %}
       </div>
       {%- for variant in product.variants limit:1 -%}
         <p>{{ product.variants.first.options[0] }}</p>
       {%- endfor -%}
-      <p class="mt-1 text-sm text-neutral-700">
+      <p class="mt-1 text-sm text-[rgb(var(--color-black))]">
         {{ product.price | money_without_trailing_zeros }}
       </p>
     </div>
