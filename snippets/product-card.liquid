@@ -63,7 +63,7 @@ Props passed into this component:
                    opacity-0 transition-opacity duration-200
                    supports-hover:group-hover:opacity-100
                    group-[.is-active]/card:opacity-100">
-            <div class="bg-white/90 backdrop-blur-md p-2 shadow-md">
+            <div class="bg-[rgb(var(--color-white))] backdrop-blur-md p-2 shadow-md">
               <ul class="flex flex-wrap gap-2 text-xs justify-center text-[rgb(var(--color-black))]">
                 {%- for variant in product.variants -%}
                   {%- assign variant_label = variant.options[size_index] -%}
