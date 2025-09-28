@@ -654,6 +654,24 @@ b,strong{
   }
 }
 
+.slider{
+  scroll-snap-type:x var(--tw-scroll-snap-strictness);
+  --tw-scroll-snap-strictness:mandatory;
+  align-items:stretch;
+  display:flex;
+  overflow:auto hidden;
+  scroll-behavior:smooth;
+}
+
+.slider::-webkit-scrollbar{
+  display:none;
+}
+
+.slider{
+  -ms-overflow-style:none;
+  scrollbar-width:none;
+}
+
 .rte table,.rte-table,.rte-table table{
   overflow:auto visible;
   width:100%;
