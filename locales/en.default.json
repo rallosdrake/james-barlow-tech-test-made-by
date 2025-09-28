@@ -326,5 +326,8 @@
   "localization": {
     "select": "Select your country and currency",
     "update_language": "Change"
+  },
+  "product_slider": {
+    "empty": "Add products to the slider"
   }
 }
