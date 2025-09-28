@@ -2,6 +2,14 @@
     "sections": {
         "product_slider": {
             "name": "Product Slider",
+            "heading": {
+                "name": "Heading",
+                "default": "One suit,suits all",
+                "cta": "CTA text",
+                "cta_default": "Shop now",
+                "cta_link": "Button link",
+                "product_list": "Product list"
+            }
         }
     }
 }
