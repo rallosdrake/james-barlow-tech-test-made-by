@@ -88,7 +88,7 @@ Props passed into this component:
           <p class="mt-2 text-sm mr-6 text-[--color-pale-grey]">+ 6 Colours</p>
         {% endif %}
       </div>
-      {%- for variant in product.variants -%}
+      {%- for variant in product.variants limit:1 -%}
         <p>{{ product.variants.first.options[0] }}</p>
       {%- endfor -%}
       <p class="mt-1 text-sm text-neutral-700">
