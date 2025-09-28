@@ -43,7 +43,7 @@ Props passed into this component:
           class="absolute right-2 top-2 p-2 pt-0 opacity-0 transition-opacity duration-200
                  supports-hover:group-hover:opacity-100
                  group-[.is-active]/card:opacity-100">
-          {%- render 'svg', svg: 'wishlist', class: 'w-6 h-6 text-gray-500' -%}
+          {%- render 'svg', svg: 'wishlist', class: 'w-6 h-6' -%}
         </button>
 
         {% if show_sizes and product.has_only_default_variant == false %}
