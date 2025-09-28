@@ -15,7 +15,7 @@ Props passed into this component:
     assign badge_text  = product.metafields.custom.badge.value
   -%}
   
-  <article>
+  <article class="pb-20">
     <a href="{{ product.url }}" class="block group">
       {% if first_image %}
         <div class="relative aspect-[3/4] overflow-hidden bg-neutral-100 group">
@@ -55,15 +55,16 @@ Props passed into this component:
             -%}
             <div class="absolute inset-x-0 bottom-0 p-3
               opacity-0 group-hover:opacity-100 transition-opacity duration-200
-              pointer-events-none">
+              ">
               <div class="bg-white/90 backdrop-blur-md p-2 shadow-md">
-                <ul class="flex flex-wrap gap-2 text-xs justify-center text-pale-grey" id="variant-list">
+                <ul class="flex flex-wrap gap-2 text-xs justify-center text-pale-grey">
                   {%- for variant in product.variants -%}
                     {%- assign variant_label = variant.options[size_index] -%}
                     {%- assign variant_qty = variant.available -%}
                     <li
                       class="px-2 py-1 flex justify-center items-center cursor-pointer variant-item
-                              {% unless variant_qty %}text-pale-grey opacity-50 pointer-events-none{% endunless %}"
+                             hover:underline
+                             {% unless variant_qty %}text-pale-grey opacity-50 pointer-events-none{% endunless %}"
                       data-variant-id="{{ variant.id }}"
                     >
                       {{ variant_label }}
@@ -92,4 +93,3 @@ Props passed into this component:
       </p>
     </div>
   </article>
-  
