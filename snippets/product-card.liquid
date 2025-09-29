@@ -1,104 +1,119 @@
 {%- comment -%}
-Props passed into this component:
-- show_badge: Boolean, determines if the badge is displayed (default: true)
-- show_sizes: Boolean, determines if the sizes overlay is displayed (default: true)
-- show_colours_hint: Boolean, determines if the "+ Colours" hint is displayed (default: true)
-- product: The product object containing details like title, price, images, variants, etc.
+    Props passed into this component:
+    - show_badge: Boolean, determines if the badge is displayed (default: true)
+    - show_sizes: Boolean, determines if the sizes overlay is displayed (default: true)
+    - show_colours_hint: Boolean, determines if the "+ Colours" hint is displayed (default: true)
+    - product: The product object containing details like title, price, images, variants, etc.
 {%- endcomment -%}
 
 {%- liquid
-    assign show_badge        = show_badge        | default: true
-    assign show_sizes        = show_sizes        | default: true
-    assign show_colours_hint = show_colours_text 
-  
+    assign show_badge = show_badge | default: true
+    assign show_sizes = show_sizes | default: true
+    assign show_colours_hint = show_colours_text
+
     assign first_image = product.featured_image | default: product.images.first
-    assign badge_text  = product.metafields.custom.badge.value
-  -%}
-  
-  <article class="product-card group/card pb-20">
-  <a href="{{ product.url }}" class="block group">
-    {% if first_image %}
-      <div class="relative aspect-[3/4] overflow-hidden">
-        {% render 'image' 
-          image: first_image,
-          class="w-full h-full object-cover transition-transform duration-300
-          supports-hover:group-hover:scale-[1.02]",
-          factor: 0.5,
-          mobile_factor: 1,
-          loading: 'eager',
-          alt: product.title
-        %}
-        {%- if show_badge and badge_text != blank -%}
-          <span
-            class="absolute left-2 top-2 px-2 py-1 text-xs
-                   bg-[rgb(var(--color-highlight))] text-[rgb(var(--color-white))]
-                   opacity-0 transition-opacity duration-200
-                   supports-hover:group-hover:opacity-100
-                   group-[.is-active]/card:opacity-100">
-            {{ badge_text }}
-          </span>
-        {%- endif -%}
+    assign badge_text = product.metafields.custom.badge.value
+-%}
 
-        <button type="button" aria-label="Add to wishlist" data-prevent-nav
-          class="absolute right-2 top-2 p-2 pt-0 opacity-0 transition-opacity duration-200
-                 supports-hover:group-hover:opacity-100
-                 group-[.is-active]/card:opacity-100">
-          {%- render 'svg', svg: 'wishlist', class: 'w-6 h-6' -%}
-        </button>
+<article class="product-card group/card pb-20">
+    <a href="{{ product.url }}" class="block group">
+        {% if first_image %}
+            <div class="relative aspect-[3/4] overflow-hidden">
+                {%
+                    render 'image'
+                    image: first_image,
+                    class="w-full h-full object-cover transition-transform duration-300
+                    supports-hover:group-hover:scale-[1.02]",
+                    factor: 0.5,
+                    mobile_factor: 1,
+                    loading: 'eager',
+                    alt: product.title
+                %}
+                {%- if show_badge and badge_text != blank -%}
+                    <span
+                        class="
+                            absolute left-2 top-2 px-2 py-1 text-xs
+                            bg-[rgb(var(--color-highlight))] text-[rgb(var(--color-white))]
+                            opacity-0 transition-opacity duration-200
+                            supports-hover:group-hover:opacity-100
+                            group-[.is-active]/card:opacity-100
+                        "
+                    >
+                        {{ badge_text }}
+                    </span>
+                {%- endif -%}
 
-        {% if show_sizes and product.has_only_default_variant == false %}
-          {%- liquid
-            assign size_index = -1
-            for opt in product.options_with_values
-              if opt.name == 'Size'
-                assign size_index = forloop.index0
-              endif
-            endfor
-            if size_index == -1
-              assign size_index = 0
-            endif
-          -%}
-          <div
-            class="absolute inset-x-0 bottom-0 p-3
-                   opacity-0 transition-opacity duration-200
-                   supports-hover:group-hover:opacity-100
-                   group-[.is-active]/card:opacity-100">
-            <div class="bg-[rgb(var(--color-white))] backdrop-blur-md p-2 shadow-md">
-              <ul class="flex flex-wrap gap-2 text-xs justify-center text-[rgb(var(--color-black))]">
-                {%- for variant in product.variants -%}
-                  {%- assign variant_label = variant.options[size_index] -%}
-                  <li
-                    class="px-2 py-1 flex justify-center items-center cursor-pointer variant-item hover:underline
-                           {% unless variant.available %}text-[rgb(var(--color-pale-grey))] pointer-events-none{% endunless %}"
-                    data-variant-id="{{ variant.id }}">
-                    {{ variant_label }}
-                  </li>
-                {%- endfor -%}
-              </ul>
+                <button
+                    type="button"
+                    aria-label="Add to wishlist"
+                    data-prevent-nav
+                    class="
+                        absolute right-2 top-2 p-2 pt-0 opacity-0 transition-opacity duration-200
+                        supports-hover:group-hover:opacity-100
+                        group-[.is-active]/card:opacity-100
+                    "
+                >
+                    {%- render 'svg', svg: 'wishlist', class: 'w-6 h-6' -%}
+                </button>
+
+                {% if show_sizes and product.has_only_default_variant == false %}
+                    {%- liquid
+                        assign size_index = -1
+                        for opt in product.options_with_values
+                            if opt.name == 'Size'
+                                assign size_index = forloop.index0
+                            endif
+                        endfor
+                        if size_index == -1
+                            assign size_index = 0
+                        endif
+                    -%}
+                    <div
+                        class="
+                            absolute inset-x-0 bottom-0 p-3
+                            opacity-0 transition-opacity duration-200
+                            supports-hover:group-hover:opacity-100
+                            group-[.is-active]/card:opacity-100
+                        "
+                    >
+                        <div class="bg-[rgb(var(--color-white))] backdrop-blur-md p-2 shadow-md">
+                            <ul class="flex flex-wrap gap-2 text-xs justify-center text-[rgb(var(--color-black))]">
+                                {%- for variant in product.variants -%}
+                                    {%- assign variant_label = variant.options[size_index] -%}
+                                    <li
+                                        class="
+                                            px-2 py-1 flex justify-center items-center cursor-pointer variant-item hover:underline
+                                            {% unless variant.available %}text-[rgb(var(--color-pale-grey))] pointer-events-none{% endunless %}
+                                        "
+                                        data-variant-id="{{ variant.id }}"
+                                    >
+                                        {{ variant_label }}
+                                    </li>
+                                {%- endfor -%}
+                            </ul>
+                        </div>
+                    </div>
+                {% endif %}
             </div>
-          </div>
         {% endif %}
-      </div>
-    {% endif %}
-  </a>
+    </a>
 
-  <div class="mt-3 ml-4">
-    <div class="flex flex-row items-baseline justify-between">
-      <h3 class="text-base">{{ product.title }}</h3>
-      {% if show_colours_hint %}
-        <p class="mt-2 text-sm mr-6 text-[rgb(var(--color-pale-grey))]">+ 6 Colours</p>
-      {% endif %}
-    </div>
-    {% for option in product.options_with_values %}
-      {% if option.name == 'Color' %}
-        {% for value in option.values %}
-          {{ value }}
+    <div class="mt-3 ml-4">
+        <div class="flex flex-row items-baseline justify-between">
+            <h3 class="text-base">{{ product.title }}</h3>
+            {% if show_colours_hint %}
+                <p class="mt-2 text-sm mr-6 text-[rgb(var(--color-pale-grey))]">+ 6 Colours</p>
+            {% endif %}
+        </div>
+        {% for option in product.options_with_values %}
+            {% if option.name == 'Color' %}
+                {% for value in option.values %}
+                    {{ value }}
+                {% endfor %}
+            {% endif %}
         {% endfor %}
-      {% endif %}
-    {% endfor %}
-    <p class="mt-1 text-sm text-[rgb(var(--color-black))]">
-      {{ product.price | money_without_trailing_zeros }}
-    </p>
-  </div>
+        <p class="mt-1 text-sm text-[rgb(var(--color-black))]">
+            {{ product.price | money_without_trailing_zeros }}
+        </p>
+    </div>
 </article>
-
