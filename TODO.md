@@ -38,7 +38,7 @@
   - Show “+6 colors”. X
   - Show size selector (variant list). X
 - Color string from category metafield x 
-- Style wishlist icon and badge 
+- Style wishlist icon and badge  X
 
 ---
 
@@ -51,18 +51,17 @@
 
 ## 5. Sticky Title & CTA
 - Implement sticky alignment per Figma:
-  - **Desktop**: Title and CTA aligned above the grid.
+  - **Desktop**: Title and CTA aligned above the grid. 
   - **Mobile**: Title and CTA “stuck” to the bottom of the viewport when scrolling.
 
 ---
 
 ## 6. Polish & QA
-- Swing back to variant colours.
-- Verify spacing matches Figma design.
-- Check responsive breakpoints.
-- Test hover vs. touch behavior:
+- Verify spacing matches Figma design. X
+- Check responsive breakpoints. X
+- Test hover vs. touch behavior: X
   - Use `supports-hover:` directive for tablets. X
 - Run Lighthouse/PageSpeed tests for: 93!
   - Performance. X
   - Accessibility. X
-- Confirm the use of `rem` units instead of `px`.
+- Confirm the use of `rem` units instead of `px`. X
