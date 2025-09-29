@@ -89,6 +89,13 @@ Props passed into this component:
         <p class="mt-2 text-sm mr-6 text-[rgb(var(--color-pale-grey))]">+ 6 Colours</p>
       {% endif %}
     </div>
+    {% for option in product.options_with_values %}
+      {% if option.name == 'Color' %}
+        {% for value in option.values limit:4 %}
+          {{ value }}
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
     <p class="mt-1 text-sm text-[rgb(var(--color-black))]">
       {{ product.price | money_without_trailing_zeros }}
     </p>
