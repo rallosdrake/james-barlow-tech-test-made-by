@@ -1,9 +1,16 @@
 {% liquid
     assign products = section.settings.products
 %}
-<section class="relative my-20">
+
+<section
+    class="
+        relative
+        {{ section.settings.margin_top }}
+        {{ section.settings.margin_bottom }}
+    "
+>
     <!-- Sticky viewport container -->
-    <div class="sticky top-0 bg-white flex justify-between desktop:px-12 desktop:pb-24 tablet:px-4 tablet:pb-6">
+    <div class="sticky z-10 top-0 bg-white flex justify-between desktop:px-12 desktop:pb-24 tablet:px-4 tablet:pb-6">
         <!-- Title row -->
         <h2 class="text-heading-md">
             {{ section.settings.heading }}
@@ -74,6 +81,30 @@
                 "id": "products",
                 "label": "t:sections.product_slider.heading.product_list",
                 "limit": 10
+            },
+            {
+                "type": "select",
+                "id": "margin_top",
+                "label": "Margin top",
+                "default": "mt-0",
+                "options": [
+                    { "value": "mt-0", "label": "None" },
+                    { "value": "mt-8", "label": "Small" },
+                    { "value": "mt-16", "label": "Medium" },
+                    { "value": "mt-24", "label": "Large" }
+                ]
+            },
+            {
+                "type": "select",
+                "id": "margin_bottom",
+                "label": "Margin bottom",
+                "default": "mb-0",
+                "options": [
+                    { "value": "mb-0", "label": "None" },
+                    { "value": "mb-8", "label": "Small" },
+                    { "value": "mb-16", "label": "Medium" },
+                    { "value": "mb-24", "label": "Large" }
+                ]
             }
         ],
         "presets": [
