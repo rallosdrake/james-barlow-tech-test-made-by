@@ -1,32 +1,26 @@
 {% liquid
   assign products = section.settings.products
 %}
+  <section class="relative my-20">
+    <!-- Sticky viewport container -->
+    <div class="sticky top-0 bg-white flex justify-between desktop:px-12 desktop:pb-24 tablet:px-4 tablet:pb-6">
+        <!-- Title row -->
+          <h2 class="text-heading-md">
+            {{ section.settings.heading }}
+          </h2>
+      
+        <!-- CTA row -->
+        {% if section.settings.cta != blank and section.settings.cta_link != blank %}
+            <a 
+              href="{{ section.settings.cta_link }}" 
+              class="inline-flex items-center text-heading-md no-underline"
+            >
+              {{ section.settings.cta }}
+            </a>
+        {% endif %}
+     </div>
 
-<section>
-  <!-- Header -->
-  <div class="mx-auto px-4 top-0 z-10 bg-white py-6 product-slider">
-    <div class="flex items-end justify-between gap-6 pb-12">
-      <h2 class="text-heading-md">
-        {{ section.settings.heading }}
-      </h2>
-      {% if section.settings.cta != blank and section.settings.cta_link != blank %}
-        <a 
-          href="{{ section.settings.cta_link }}" 
-          class="inline-flex items-center text-heading-md no-underline"
-        >
-          {{ section.settings.cta }}
-        </a>
-      {% endif %}
-    </div>
-  </div>
-
-  {% if products == blank %}
-    <div class="mx-auto px-4 py-12 text-center">
-      {{ "product_slider.empty" | t | default: "No products selected." }}
-    </div>
-  {% else %}
-
-    <!-- Slider / Grid -->
+    <!-- Slider -->
     <div class="-mx-4 desktop:mx-0 pl-4 desktop:px-0 relative">
       <div
         id="product-slider"
@@ -35,18 +29,13 @@
         aria-label="{{ section.settings.heading | escape }}"
         class="
           tablet:flex tablet:flex-row tablet:overflow-x-auto tablet:snap-x tablet:snap-mandatory
-          gap-1 pb-6 scroll-pl-4 scrollbar-none
+          gap-1 pb-24 scroll-pl-4 scrollbar-none
           desktop:grid desktop:grid-cols-4 desktop:gap-1 desktop:overflow-visible desktop:scroll-pl-0
         "
       >
         {% for product in products %}
-          <div
-            data-slider-item
-            class="
-              tablet:max-w-[65%] shrink-0 tablet:snap-start
-            "
-          >
-            {% render "product-card",
+          <div class="tablet:max-w-[65%] shrink-0 tablet:snap-start">
+            {% render 'product-card',
               product: product,
               show_badge: section.settings.show_badge,
               show_sizes: section.settings.show_sizes,
@@ -56,12 +45,9 @@
         {% endfor %}
       </div>
     </div>
-  {% endif %}
-</section>
+  </section>
 
 
-
-  
 {% schema %}
     {
         "name": "t:sections.product_slider.name",
