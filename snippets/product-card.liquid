@@ -91,7 +91,7 @@ Props passed into this component:
     </div>
     {% for option in product.options_with_values %}
       {% if option.name == 'Color' %}
-        {% for value in option.values limit:4 %}
+        {% for value in option.values %}
           {{ value }}
         {% endfor %}
       {% endif %}
