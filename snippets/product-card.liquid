@@ -18,6 +18,7 @@
 <article class="product-card group/card pb-20">
     <a href="{{ product.url }}" class="block group">
         {% if first_image %}
+            <!-- Image -->
             <div class="relative aspect-[3/4]">
                 {% render 'image',
                     image: first_image,
@@ -27,7 +28,7 @@
                     loading: 'eager',
                     alt: product.featured_image.alt
                 %}
-
+                <!-- Badge -->
                 {%- if show_badge and badge_text != blank -%}
                     <span
                         class="
@@ -41,7 +42,7 @@
                         {{ badge_text }}
                     </span>
                 {%- endif -%}
-
+                <!-- Wishlist -->
                 <button
                     type="button"
                     aria-label="{{ 'product.wishlist.add' | t }}"
@@ -55,7 +56,7 @@
                 >
                     {%- render 'svg', svg: 'wishlist', class: 'w-6 h-6 mt-2' -%}
                 </button>
-
+                <!-- Size -->
                 {% if show_sizes and product.has_only_default_variant == false %}
                     {%- liquid
                         assign size_index = -1
@@ -106,7 +107,7 @@
             </div>
         {% endif %}
     </a>
-
+    <!-- Hardcoded color string -->
     <div class="mt-3 ml-6">
         <div class="flex flex-row items-baseline justify-between">
             <h3 class="text-heading-xs">{{ product.title }}</h3>
@@ -114,7 +115,7 @@
                 <p class="mt-2 text-sm mr-6">+ 6 Colours</p>
             {% endif %}
         </div>
-
+        <!-- Color -->
         {% for option in product.options_with_values %}
             {% if option.name == 'Color' %}
                 {% for value in option.values %}
