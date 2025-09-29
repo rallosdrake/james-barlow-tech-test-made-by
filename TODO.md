@@ -37,14 +37,15 @@
   - Show wishlist icon. X
   - Show “+6 colors”. X
   - Show size selector (variant list). X
+- Color string from category metafield x 
 - Style wishlist icon and badge 
 
 ---
 
 
 ## 4. Mobile Layout (Slider)
-- Convert the product grid into a horizontal scroll/slider for the mobile breakpoint.
-  - Example: Tap to reveal wishlist/variants.
+- Convert the product grid into a horizontal scroll/slider for the mobile breakpoint. X
+  - Example: Tap to reveal wishlist/variants. X
 
 ---
 
@@ -60,8 +61,8 @@
 - Verify spacing matches Figma design.
 - Check responsive breakpoints.
 - Test hover vs. touch behavior:
-  - Use `supports-hover:` directive for tablets.
-- Run Lighthouse/PageSpeed tests for:
-  - Performance.
-  - Accessibility.
+  - Use `supports-hover:` directive for tablets. X
+- Run Lighthouse/PageSpeed tests for: 93!
+  - Performance. X
+  - Accessibility. X
 - Confirm the use of `rem` units instead of `px`.
