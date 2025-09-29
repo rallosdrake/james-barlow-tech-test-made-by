@@ -1,86 +1,67 @@
 {% liquid
-    assign products = section.settings.products
+  assign products = section.settings.products
 %}
 
-<section class="">
-    <!-- Desktop header -->
-    <div class="mx-auto px-4 desktop:top-0 desktop:z-10 desktop:bg-white desktop:py-6">
-        <div class="flex items-end justify-between gap-6 pb-12">
-            <h2 class="text-2xl desktop:text-3xl font-medium tracking-tight">
-                {{ section.settings.heading }}
-            </h2>
-            {% if section.settings.cta != blank and section.settings.cta_link != blank %}
-                <a
-                    href="{{ section.settings.cta_link }}"
-                    class="inline-flex items-center gap-2 text-sm desktop:text-base no-underline"
-                >
-                    {{ section.settings.cta }}
-                </a>
-            {% endif %}
-        </div>
+<section>
+  <!-- Header -->
+  <div class="mx-auto px-4 desktop:top-0 desktop:z-10 desktop:bg-[rgb(var(--color-white))] desktop:py-6 product-slider">
+    <div class="flex items-end justify-between gap-6 pb-12">
+      <h2 class="text-2xl desktop:text-3xl font-medium tracking-tight">
+        {{ section.settings.heading }}
+      </h2>
+      {% if section.settings.cta != blank and section.settings.cta_link != blank %}
+        <a 
+          href="{{ section.settings.cta_link }}" 
+          class="inline-flex items-center gap-2 text-sm desktop:text-base no-underline"
+        >
+          {{ section.settings.cta }}
+        </a>
+      {% endif %}
     </div>
+  </div>
 
-    {% if products == blank %}
-        <div class="mx-auto px-4 py-12 text-center">
-            {{ 'product_slider.empty' | t | default: 'No products selected.' }}
-        </div>
-    {% else %}
-        <div>
-            <!-- Desktop static grid -->
-            <div class="tablet:hidden grid grid-cols-1 desktop:grid-cols-4 gap-6 desktop:gap-1">
-                {% for product in products %}
-                    {% render 'product-card',
-                        product: product,
-                        show_badge: section.settings.show_badge,
-                        show_sizes: section.settings.show_sizes,
-                        show_colours_text: product.metafields.custom.colours_text
-                    %}
-                {% endfor %}
-            </div>
-
-            <!-- Mobile slider -->
-            <div class="hidden tablet:grid -mx-4 px-4">
-                <div
-                    class="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-pl-4 pb-6"
-                    style="-webkit-overflow-scrolling: touch;"
-                    aria-label="{{ section.settings.heading | escape }}"
-                >
-                    {% for product in products %}
-                        <div class="min-w-[72%] snap-start">
-                            {% render 'product-card',
-                                product: product,
-                                show_badge: section.settings.show_badge,
-                                show_sizes: section.settings.show_sizes,
-                                show_colours_text: product.metafields.custom.colours_text
-                            %}
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-
-        <!-- Mobile sticky Title + CTA -->
-        {% comment %}
-            <div class="tablet:hidden fixed inset-x-0 bottom-0 z-20">
-              <div class="mx-4 mb-4 rounded-2xl bg-white/90 backdrop-blur-md shadow-lg">
-                <div class="flex items-center justify-between gap-3 px-4 py-3">
-                  <h2 class="text-base font-medium truncate">{{ section.settings.heading }}</h2>
-                  {% if section.settings.cta != blank and section.settings.cta_link != blank %}
-                    <a
-                      href="{{ section.settings.cta_link }}"
-                      class="shrink-0 inline-flex items-center rounded-full border border-neutral-900 px-4 py-2 text-sm"
-                    >
-                      {{ section.settings.cta }}
-                    </a>
-                  {% endif %}
-                </div>
-              </div>
-            </div>
-            <div class="tablet:hidden h-[84px]"></div>
-        {% endcomment %}
-    {% endif %}
+  {% if products == blank %}
+    <div class="mx-auto px-4 py-12 text-center">
+      {{ "product_slider.empty" | t | default: "No products selected." }}
+    </div>
+  {% else %}
+    <!-- Slider / Grid -->
+    <div class="-mx-4 desktop:mx-0 pl-4 desktop:px-0 relative">
+      <div
+        id="product-slider"
+        data-slider
+        aria-roledescription="carousel"
+        aria-label="{{ section.settings.heading | escape }}"
+        class="
+          tablet:flex tablet:flex-row overflow-x-auto tablet:snap-none tablet:[transform:translate3d(0,0,0)] tablet:will-change-transform
+          gap-1 pb-6 scroll-pl-4  scrollbar-none
+          desktop:grid desktop:grid-cols-4 desktop:gap-1 desktop:overflow-visible desktop:scroll-pl-0
+        "
+      >
+        {% for product in products %}
+          <div
+            data-slider-item
+            class="
+              tablet:max-w-[65%] shrink-0
+              desktop:min-w-0 desktop:shrink
+            "
+          >
+            {% render "product-card",
+              product: product,
+              show_badge: section.settings.show_badge,
+              show_sizes: section.settings.show_sizes,
+              show_colours_text: product.metafields.custom.colours_text
+            %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
 </section>
 
+
+
+  
 {% schema %}
     {
         "name": "t:sections.product_slider.name",
