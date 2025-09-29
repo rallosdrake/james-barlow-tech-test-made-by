@@ -1,31 +1,19 @@
 {
-  "printWidth": 100,
-  "tabWidth": 2,
-  "useTabs": false,
-  "semi": true,
+  "printWidth": 120,
+  "tabWidth": 4,
   "singleQuote": false,
-  "trailingComma": "all",
+  "plugins": ["@shopify/prettier-plugin-liquid"],
   "bracketSpacing": true,
-  "bracketSameLine": false,
-  "arrowParens": "avoid",
+  "prettier.bracketSameLine": true,
+  "prettier.bracketSpacing": false,
+  "singleLineLinkTags": true,
+  "indentSchema": true,
   "overrides": [
-    {
-      "files": "*.js",
-      "options": {
-        "singleQuote": true
+      {
+          "files": "*.liquid",
+          "options": {
+              "singleQuote": false
+          }
       }
-    },
-    {
-      "files": "*.css",
-      "options": {
-        "singleQuote": true
-      }
-    },
-    {
-      "files": "*.scss",
-      "options": {
-        "singleQuote": true
-      }
-    }
   ]
 }

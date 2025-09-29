@@ -34,7 +34,7 @@
     "@parcel/optimizer-terser": "*",
     "@parcel/resolver-glob": "*",
     "@parcel/watcher": "^2.5.1",
-    "@shopify/prettier-plugin-liquid": "*",
+    "@shopify/prettier-plugin-liquid": "^1.10.0",
     "@tailwindcss/aspect-ratio": "*",
     "cssnano": "*",
     "debounce": "*",
@@ -44,7 +44,8 @@
     "postcss": "*",
     "postcss-import": "*",
     "postcss-import-ext-glob": "*",
-    "prettier": "*",
+    "prettier": "^3.6.2",
+    "prettier-plugin-liquid": "^0.0.1-security",
     "tailwindcss": "3.4.17"
   },
   "browserslist": [
