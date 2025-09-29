@@ -3,6 +3,15 @@ customElements.get("custom-component") || customElements.define("custom-componen
     super();
   }
   connectedCallback() {
-    console.info("Hello world. I am a custom component and I have been initialised on the page.");
+    const e = () => {
+      document.querySelectorAll(".wishlist").forEach(e => {
+        e.addEventListener("click", e => {
+          e.preventDefault(), window.location.href = "/";
+        });
+      });
+    };
+    "loading" === document.readyState ? document.addEventListener("DOMContentLoaded", e, {
+      once: !0
+    }) : e();
   }
 });
