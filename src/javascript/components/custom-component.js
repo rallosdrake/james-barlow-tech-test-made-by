@@ -19,9 +19,23 @@ export default (() => {
          * Logs a message to the console indicating that the custom component has been initialized.
          */
         connectedCallback() {
-          console.info(
-            'Hello world. I am a custom component and I have been initialised on the page.',
-          );
+          const init = () => {
+            const wishlistElements = document.querySelectorAll('.wishlist'); 
+            wishlistElements.forEach((el) => {
+              el.addEventListener('click', (e) => {
+                e.preventDefault(); // Prevent the default action (if applicable)
+                window.location.href = '/'; // Redirect to the homepage
+              });
+              
+            });
+          };
+        
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init, { once: true });
+          } else {
+            // still might be too early for AJAXed content, delegation is safer
+            init();
+          }
         }
       },
     );
