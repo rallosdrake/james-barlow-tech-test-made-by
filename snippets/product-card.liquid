@@ -22,7 +22,7 @@
           {%
             render "image",
             image: first_image,
-            class: "w-full h-full object-cover transition-transform duration-300 supports-hover:group-hover:scale-[1.02]",
+            class: "w-full h-full object-cover",
             factor: 0.5,
             mobile_factor: 1,
             loading: "eager",
@@ -33,7 +33,7 @@
             <span
               class="
                 absolute left-2 top-2 px-2 py-1 text-xs
-                bg-[rgb(var(--color-highlight))] text-[rgb(var(--color-white))]
+                bg-highlight text-white
                 opacity-0 transition-opacity duration-200
                 supports-hover:group-hover:opacity-100
                 group-[.is-active]/card:opacity-100
@@ -45,7 +45,7 @@
   
           <button
             type="button"
-            aria-label="Add to wishlist"
+            aria-label="{{ 'product.wishlist.add' | t }}"
             data-prevent-nav
             class="
             absolute right-2 top-2 z-10 p-2 pt-0 opacity-0 transition-opacity duration-200
@@ -69,7 +69,7 @@
                 assign size_index = 0
               endif
             -%}
-  
+            
             <div
               class="
                 absolute inset-x-0 bottom-0 p-3
@@ -78,11 +78,11 @@
                 group-[.is-active]/card:opacity-100
               "
             >
-              <div class="bg-[rgb(var(--color-white))] backdrop-blur-md p-2 shadow-md">
+              <div class="bg-white backdrop-blur-md p-2 shadow-md">
                 <ul
                   class="
                     flex flex-wrap gap-2 text-xs justify-center
-                    text-[rgb(var(--color-black))]
+                    text-black
                   "
                 >
                   {%- for variant in product.variants -%}
@@ -90,9 +90,9 @@
                     <li
                       class="
                         px-2 py-1 flex justify-center items-center cursor-pointer
-                        variant-item hover:underline
+                        variant-item hover:underline text-sm
                         {% unless variant.available %}
-                          text-[rgb(var(--color-pale-grey))] pointer-events-none
+                          pointer-events-none opacity-50
                         {% endunless %}
                       "
                       data-variant-id="{{ variant.id }}"
@@ -110,9 +110,9 @@
   
     <div class="mt-3 ml-6">
       <div class="flex flex-row items-baseline justify-between">
-        <h3 class="text-base">{{ product.title }}</h3>
+        <h3 class="text-heading-xs">{{ product.title }}</h3>
         {% if show_colours_hint %}
-          <p class="mt-2 text-sm mr-6 text-[rgb(var(--color-pale-grey))]">
+          <p class="mt-2 text-sm mr-6">
             + 6 Colours
           </p>
         {% endif %}
@@ -121,12 +121,12 @@
       {% for option in product.options_with_values %}
         {% if option.name == "Color" %}
           {% for value in option.values %}
-            {{ value }}
+            <p class="text-sm">{{ value }}</p>
           {% endfor %}
         {% endif %}
       {% endfor %}
   
-      <p class="mt-1 text-sm text-[rgb(var(--color-black))]">
+      <p class="mt-1 text-sm color-black">
         {{ product.price | money_without_trailing_zeros }}
       </p>
     </div>
